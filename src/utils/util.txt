@@ -1,2 +1,0 @@
-user:root
-pw:hx891231
