@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="pojo.Order">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userId" />
+    <result column="loginName" jdbcType="VARCHAR" property="loginName" />
+    <result column="userAddress" jdbcType="VARCHAR" property="userAddress" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="cost" jdbcType="REAL" property="cost" />
+    <result column="serialNumber" jdbcType="VARCHAR" property="serialNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, loginName, userAddress, createTime, cost, serialNumber
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from easybuy_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from easybuy_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.Order">
+    insert into easybuy_order (id, userId, loginName, 
+      userAddress, createTime, cost, 
+      serialNumber)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, 
+      #{userAddress,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{cost,jdbcType=REAL}, 
+      #{serialNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Order">
+    insert into easybuy_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="loginName != null">
+        loginName,
+      </if>
+      <if test="userAddress != null">
+        userAddress,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="serialNumber != null">
+        serialNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=REAL},
+      </if>
+      <if test="serialNumber != null">
+        #{serialNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Order">
+    update easybuy_order
+    <set>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="loginName != null">
+        loginName = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null">
+        userAddress = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=REAL},
+      </if>
+      <if test="serialNumber != null">
+        serialNumber = #{serialNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Order">
+    update easybuy_order
+    set userId = #{userId,jdbcType=INTEGER},
+      loginName = #{loginName,jdbcType=VARCHAR},
+      userAddress = #{userAddress,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      cost = #{cost,jdbcType=REAL},
+      serialNumber = #{serialNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
