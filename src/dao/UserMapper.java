@@ -2,6 +2,8 @@ package dao;
 
 import pojo.User;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -21,4 +23,10 @@ public interface UserMapper {
      * @return
      */
     User login(User user);
+
+    /**
+     * 用户列表
+     * @return
+     */
+    List<User> userList();
 }

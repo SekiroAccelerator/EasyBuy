@@ -16,4 +16,11 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.RuntimeException">localhost/test.html</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

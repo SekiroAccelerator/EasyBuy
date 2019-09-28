@@ -142,4 +142,8 @@
   <select id="login" resultType="user">
     select * from easybuy_user where loginName =#{loginName} and password=#{password}
   </select>
+<!--  用户列表-->
+  <select id="userList">
+    select * from easybuy_user
+  </select>
 </mapper>

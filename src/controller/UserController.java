@@ -12,11 +12,12 @@ import utils.Code;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import java.util.List;
 
 @Controller
 public class UserController {
     @Resource
-    private UserService Service;
+    private UserService service;
     @RequestMapping(value = "login",method = RequestMethod.POST)
     @ResponseBody
     public User login(@RequestParam(value = "loginName",required = false) String loginName, @RequestParam(value = "password",required = false) String password) {
@@ -25,6 +26,12 @@ public class UserController {
         if (password!=null&&password.length()>0){
             user.setPassword(Code.jiaMiOne(password));
         }
-        return Service.login(user);
+        return service.login(user);
+    }
+
+    @RequestMapping("userList")
+    @ResponseBody
+    public List<User> userList() {
+        return service.userList();
     }
 }
