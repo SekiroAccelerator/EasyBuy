@@ -14,6 +14,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     @Qualifier("userMapper")
     private UserMapper userMapper;
+
     @Override
     public User login(User user) {
         return userMapper.login(user);

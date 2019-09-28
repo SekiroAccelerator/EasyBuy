@@ -18,6 +18,7 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserService service;
+
     @RequestMapping(value = "login",method = RequestMethod.POST)
     @ResponseBody
     public User login(@RequestParam(value = "loginName",required = false) String loginName, @RequestParam(value = "password",required = false) String password) {
@@ -29,7 +30,7 @@ public class UserController {
         return service.login(user);
     }
 
-    @RequestMapping("userList")
+    @RequestMapping(value = "userList")
     @ResponseBody
     public List<User> userList() {
         return service.userList();
