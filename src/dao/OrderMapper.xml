@@ -9,6 +9,14 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="cost" jdbcType="REAL" property="cost" />
     <result column="serialNumber" jdbcType="VARCHAR" property="serialNumber" />
+    <!--一个订单项对多商品-->
+    <collection property="detailList" ofType="pojo.Order_Detail">
+      <id column="detail_id" property="id"/>
+      <result column="detail_orderId" property="orderId"/>
+      <result column="detail_productId" property="productId"/>
+      <result column="detail_quantity" property="quantity"/>
+      <result column="detail_cost" property="cost"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, userId, loginName, userAddress, createTime, cost, serialNumber
@@ -114,4 +122,27 @@
       serialNumber = #{serialNumber,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--根据userId查询订单数量-->
+  <select id="selectOrderCount" resultType="int" parameterType="java.lang.Integer">
+    select count(1) from easybuy_order where userId = #{userId}
+  </select>
+
+  <!--根据userId分页查询所有订单-->
+  <select id="selectOrderLimit" resultType="Order" parameterType="Map">
+    select  * from easybuy_order
+    where userId = #{userId}
+    limit #{pageStart},#{pageSize}
+  </select>
+
+  <!--查询订单数量（管理员）-->
+  <select id="selectOrderCount2" resultType="int">
+    select count(1) from easybuy_order
+  </select>
+
+  <!--分页查询所有订单（管理员）-->
+  <select id="selectOrderLimit2" resultType="Order" parameterType="Map">
+    select  * from easybuy_order
+    limit #{pageStart},#{pageSize}
+  </select>
 </mapper>

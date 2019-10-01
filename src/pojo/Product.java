@@ -1,5 +1,7 @@
 package pojo;
 
+import java.util.Date;
+
 public class Product {
     private Integer id;
 
@@ -20,6 +22,8 @@ public class Product {
     private String fileName;
 
     private Integer isDelete;
+
+    private Date createTime;
 
     public Integer getId() {
         return id;
@@ -99,5 +103,13 @@ public class Product {
 
     public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

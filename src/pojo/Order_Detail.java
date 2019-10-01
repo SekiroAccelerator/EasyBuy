@@ -11,6 +11,16 @@ public class Order_Detail {
 
     private Float cost;
 
+    private Product product;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     public Integer getId() {
         return id;
     }

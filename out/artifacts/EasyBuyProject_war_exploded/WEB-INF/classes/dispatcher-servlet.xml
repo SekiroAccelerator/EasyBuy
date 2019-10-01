@@ -16,11 +16,8 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="exceptionMappings">
-            <props>
-                <prop key="java.lang.RuntimeException">localhost/test.html</prop>
-            </props>
-        </property>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="50000000"/>
+        <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 </beans>

@@ -12,10 +12,11 @@
     <result column="categoryLevel3Id" jdbcType="INTEGER" property="categoryLevel3Id" />
     <result column="fileName" jdbcType="VARCHAR" property="fileName" />
     <result column="isDelete" jdbcType="INTEGER" property="isDelete" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
     id, name, description, price, stock, categoryLevel1Id, categoryLevel2Id, categoryLevel3Id, 
-    fileName, isDelete
+    fileName, isDelete, createTime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -31,11 +32,11 @@
     insert into easybuy_product (id, name, description, 
       price, stock, categoryLevel1Id, 
       categoryLevel2Id, categoryLevel3Id, fileName, 
-      isDelete)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{price,jdbcType=REAL}, #{stock,jdbcType=INTEGER}, #{categoryLevel1Id,jdbcType=INTEGER}, 
-      #{categoryLevel2Id,jdbcType=INTEGER}, #{categoryLevel3Id,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, 
-      #{isDelete,jdbcType=INTEGER})
+      isDelete, createTime)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+      #{price,jdbcType=REAL}, #{stock,jdbcType=INTEGER}, #{categoryLevel1Id,jdbcType=INTEGER},
+      #{categoryLevel2Id,jdbcType=INTEGER}, #{categoryLevel3Id,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR},
+      #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="pojo.Product">
     insert into easybuy_product
@@ -70,6 +71,9 @@
       <if test="isDelete != null">
         isDelete,
       </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -101,6 +105,9 @@
       </if>
       <if test="isDelete != null">
         #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -134,6 +141,9 @@
       <if test="isDelete != null">
         isDelete = #{isDelete,jdbcType=INTEGER},
       </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -147,7 +157,8 @@
       categoryLevel2Id = #{categoryLevel2Id,jdbcType=INTEGER},
       categoryLevel3Id = #{categoryLevel3Id,jdbcType=INTEGER},
       fileName = #{fileName,jdbcType=VARCHAR},
-      isDelete = #{isDelete,jdbcType=INTEGER}
+      isDelete = #{isDelete,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
