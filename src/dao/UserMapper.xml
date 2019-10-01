@@ -138,12 +138,29 @@
       type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--查询用户名是否存在-->
+  <select id="loginNameIsExist" parameterType="java.lang.String" resultType="Integer">
+    select count(1) from easybuy_user
+    where loginName = #{loginName,jdbcType=VARCHAR}
+  </select>
   <!--  登录-->
   <select id="login" resultType="user">
     select * from easybuy_user where loginName =#{loginName} and password=#{password}
   </select>
+<!--  用户数-->
+  <select id="count" resultType="Integer">
+    select count(1) from easybuy_user
+  </select>
 <!--  用户列表-->
   <select id="userList" resultType="user">
-    select * from easybuy_user
+    select * from easybuy_user limit #{pageNo},#{pageSize}
   </select>
+<!--  ID查用户-->
+  <select id="userById" resultType="user">
+    select * from easybuy_user where id=#{id}
+  </select>
+<!--  根据id修改头像-->
+  <update id="updatePic" parameterType="user">
+    update easybuy_user set pic=#{pic} where id=#{id}
+  </update>
 </mapper>
