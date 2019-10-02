@@ -1,6 +1,7 @@
 package pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private Integer id;
@@ -15,16 +16,36 @@ public class Order {
 
     private Float cost;
 
+    private Integer state;
+
     private String serialNumber;
 
-    private int state;
+    private List<Order_Detail> detailList;
 
-    public int getState() {
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Integer getState() {
         return state;
     }
 
-    public void setState(int state) {
+    public void setState(Integer state) {
         this.state = state;
+    }
+
+    public List<Order_Detail> getDetailList() {
+        return detailList;
+    }
+
+    public void setDetailList(List<Order_Detail> detailList) {
+        this.detailList = detailList;
     }
 
     public Integer getId() {

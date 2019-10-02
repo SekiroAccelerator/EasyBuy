@@ -7,11 +7,11 @@ public class Order_Detail {
 
     private Integer productId;
 
+    private Product product;
+
     private Integer quantity;
 
     private Float cost;
-
-    private Product product;
 
     public Product getProduct() {
         return product;
@@ -59,5 +59,17 @@ public class Order_Detail {
 
     public void setCost(Float cost) {
         this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return "Order_Detail{" +
+                "id=" + id +
+                ", orderId=" + orderId +
+                ", productId=" + productId +
+                ", product=" + product +
+                ", quantity=" + quantity +
+                ", cost=" + cost +
+                '}';
     }
 }

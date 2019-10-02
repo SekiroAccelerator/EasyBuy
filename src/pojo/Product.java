@@ -112,4 +112,21 @@ public class Product {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", categoryLevel1Id=" + categoryLevel1Id +
+                ", categoryLevel2Id=" + categoryLevel2Id +
+                ", categoryLevel3Id=" + categoryLevel3Id +
+                ", fileName='" + fileName + '\'' +
+                ", isDelete=" + isDelete +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

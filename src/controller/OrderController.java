@@ -10,6 +10,9 @@ import pojo.Order;
 import service.OrderService;
 import utils.Pages;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * 订单控制器
@@ -29,8 +32,8 @@ public class OrderController {
      */
     @RequestMapping("/selectAllOrder")
     @ResponseBody
-    public Pages<Order> selectAllOrder(Integer userId,Integer pageNow){
-        return orderService.selectAllOrder(userId,pageNow);
+    public Pages<Order> selectAllOrder(Integer userId,Integer pageNow,Integer state){
+        return orderService.selectAllOrder(userId,pageNow,state);
     }
 
     /**
@@ -40,8 +43,8 @@ public class OrderController {
      */
     @RequestMapping("/selectAllOrder2")
     @ResponseBody
-    public Pages<Order> selectAllOrder2(Integer pageNow){
-        return orderService.selectAllOrder2(pageNow);
+    public Pages<Order> selectAllOrder2(Integer pageNow,Integer state){
+        return orderService.selectAllOrder2(pageNow,state);
     }
 
     /**
@@ -64,5 +67,14 @@ public class OrderController {
     @ResponseBody
     public Order selectOrderById(@RequestParam(value = "orderId") Integer id){
         return orderService.selectOrderById(id);
+    }
+
+    @RequestMapping("/orderStateById")
+    @ResponseBody
+    public Map orderStateById(@RequestParam Integer userId){
+        Map<String,Object> map=new HashMap<>();
+        map.put("state_yes", orderService.selectOrderStateCountById(userId,1));
+        map.put("state_no", orderService.selectOrderStateCountById(userId,0));
+        return map;
     }
 }

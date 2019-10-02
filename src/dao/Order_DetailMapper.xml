@@ -7,6 +7,12 @@
     <result column="productId" jdbcType="INTEGER" property="productId" />
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
     <result column="cost" jdbcType="REAL" property="cost" />
+    <association property="product" javaType="pojo.Product">
+      <id column="product_id" property="id"/>
+      <result column="product_name" property="name"/>
+      <result column="product_price" property="price"/>
+      <result column="product_fileName" property="fileName"/>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     id, orderId, productId, quantity, cost

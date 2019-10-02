@@ -1,5 +1,6 @@
 package dao;
 
+import org.apache.ibatis.annotations.Param;
 import pojo.Order;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public interface OrderMapper {
      * @param userId
      * @return
      */
-    int selectOrderCount(Integer userId);
+    int selectOrderCount(@Param("userId")Integer userId,@Param("state")Integer state);
 
     /**
      * 分页查询所有订单（管理员）
@@ -62,6 +63,14 @@ public interface OrderMapper {
      * 查询订单数量（管理员）
      * @return
      */
-    int selectOrderCount2();
+    int selectOrderCount2(@Param("state")Integer state);
+
+    /**
+     * id和状态查订单数量
+     * @param userId
+     * @param state
+     * @return
+     */
+    int selectOrderStateCountById(@Param("userId") Integer userId,@Param("state") Integer state);
 
 }

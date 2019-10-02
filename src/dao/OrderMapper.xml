@@ -125,24 +125,50 @@
 
   <!--根据userId查询订单数量-->
   <select id="selectOrderCount" resultType="int" parameterType="java.lang.Integer">
-    select count(1) from easybuy_order where userId = #{userId}
+    select count(1) from easybuy_order
+    <where>
+      userId = #{userId}
+      <if test="state!=null">
+        and state=#{state}
+      </if>
+    </where>
   </select>
 
   <!--根据userId分页查询所有订单-->
   <select id="selectOrderLimit" resultType="Order" parameterType="Map">
     select  * from easybuy_order
-    where userId = #{userId}
+    <where>
+      userId = #{userId}
+      <if test="state!=null">
+        and state=#{state}
+      </if>
+    </where>
     limit #{pageStart},#{pageSize}
   </select>
 
   <!--查询订单数量（管理员）-->
   <select id="selectOrderCount2" resultType="int">
     select count(1) from easybuy_order
+    <where>
+      <if test="state!=null">
+        state=#{state}
+      </if>
+    </where>
   </select>
 
   <!--分页查询所有订单（管理员）-->
   <select id="selectOrderLimit2" resultType="Order" parameterType="Map">
     select  * from easybuy_order
+    <where>
+      <if test="state!=null">
+        state=#{state}
+      </if>
+    </where>
     limit #{pageStart},#{pageSize}
+  </select>
+
+  <!--  根据id查订单状态-->
+  <select id="selectOrderStateCountById" resultType="Integer">
+    select count(1) from easybuy_order where userId = #{userId} and state =#{state}
   </select>
 </mapper>

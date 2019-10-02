@@ -1,17 +1,14 @@
 package utils;
 
-import pojo.Order;
-import pojo.Product;
-
 import java.util.List;
 
 //Pages对象
 public class Pages<T> {
     private int pageNow = 1 ;
-    private int pageSize = 5 ;
+    private int pageSize = 16 ;
     private int pageCount = 0;
     private int count = 0;
-    private List<Order> list ;
+    private List<T> list ;
 
     public int getPageNow() {
         return pageNow;
@@ -47,11 +44,12 @@ public class Pages<T> {
         this.count = count;
     }
 
-    public List<Order> getList() {
+    public List<T> getList() {
         return list;
     }
 
-    public void setList(List<Order> list) {
+    public void setList(List<T> list) {
         this.list = list;
     }
 }
+

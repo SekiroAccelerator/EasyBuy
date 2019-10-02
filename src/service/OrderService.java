@@ -13,14 +13,14 @@ public interface OrderService {
      * @param userId
      * @return
      */
-    Pages<Order> selectAllOrder(Integer pageNow, Integer userId);
+    Pages<Order> selectAllOrder(Integer pageNow, Integer userId,Integer state);
 
     /**
      * 根据用户编号分页查询所有的订单信息（管理员）
      * @param pageNow
      * @return
      */
-    Pages<Order> selectAllOrder2(Integer pageNow);
+    Pages<Order> selectAllOrder2(Integer pageNow,Integer state);
 
     /**
      * 根据ID主键删除订单号
@@ -35,4 +35,12 @@ public interface OrderService {
      * @return
      */
     Order selectOrderById(Integer id);
+
+    /**
+     * id和状态查订单数量
+     * @param userId
+     * @param state
+     * @return
+     */
+    int selectOrderStateCountById(Integer userId,Integer state);
 }

@@ -59,11 +59,6 @@ public class Order_DetailServiceImpl implements Order_DetailService {
      */
     @Override
     public List<Order_Detail> selectDetailByOrderId(Integer orderId){
-        List<Order_Detail> list = order_detailMapper.selectDetailByOrderId(orderId);
-        //System.out.println(list);
-//        for(Order_Detail detail : list){
-//            System.out.println(detail.getProduct());
-//        }
         return order_detailMapper.selectDetailByOrderId(orderId);
     }
 }
