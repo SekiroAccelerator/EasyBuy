@@ -26,4 +26,11 @@ public interface Order_DetailService {
      * @return
      */
     int addDetail(Order_Detail detail);
+
+    /**
+     * 添加
+     * @param record
+     * @return
+     */
+    int insertSelective(Order_Detail record);
 }

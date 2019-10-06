@@ -1,8 +1,10 @@
 package pojo;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
-public class Product {
+public class Product implements Serializable {
     private Integer id;
 
     private String name;
@@ -24,6 +26,33 @@ public class Product {
     private Integer isDelete;
 
     private Date createTime;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) &&
+                Objects.equals(name, product.name) &&
+                Objects.equals(description, product.description) &&
+                Objects.equals(price, product.price) &&
+                Objects.equals(stock, product.stock) &&
+                Objects.equals(categoryLevel1Id, product.categoryLevel1Id) &&
+                Objects.equals(categoryLevel2Id, product.categoryLevel2Id) &&
+                Objects.equals(categoryLevel3Id, product.categoryLevel3Id) &&
+                Objects.equals(fileName, product.fileName) &&
+                Objects.equals(isDelete, product.isDelete) &&
+                Objects.equals(createTime, product.createTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, price, stock, categoryLevel1Id, categoryLevel2Id, categoryLevel3Id, fileName, isDelete, createTime);
+    }
 
     public Integer getId() {
         return id;

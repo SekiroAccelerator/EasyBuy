@@ -7,9 +7,13 @@ public class User_Address {
 
     private Integer userId;
 
+    private String name;
+
     private String address;
 
-    private Date createTime;
+    private String fullAddress;
+
+    private String phone;
 
     private Integer isDefault;
 
@@ -31,6 +35,14 @@ public class User_Address {
         this.userId = userId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
     public String getAddress() {
         return address;
     }
@@ -39,12 +51,20 @@ public class User_Address {
         this.address = address == null ? null : address.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public String getFullAddress() {
+        return fullAddress;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setFullAddress(String fullAddress) {
+        this.fullAddress = fullAddress == null ? null : fullAddress.trim();
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public Integer getIsDefault() {

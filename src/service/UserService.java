@@ -66,4 +66,11 @@ public interface UserService {
      * @return
      */
     int deleteByPrimaryKey(Integer id);
+
+    /**
+     * 验证邮箱,密码,电话
+     * @param user
+     * @return
+     */
+    int yanZheng(User user);
 }

@@ -25,4 +25,10 @@ public class Order_DetailController {
     public List<Order_Detail> selectDetailByOrderId(Integer orderId){
         return order_detailService.selectDetailByOrderId(orderId);
     }
+
+    @RequestMapping("/addOrderDetail")
+    @ResponseBody
+    public boolean addOrder(Order_Detail order_Detail){
+        return order_detailService.insertSelective(order_Detail)>0;
+    }
 }

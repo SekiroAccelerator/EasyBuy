@@ -163,4 +163,20 @@
   <update id="updatePic" parameterType="user">
     update easybuy_user set pic=#{pic} where id=#{id}
   </update>
+<!--  验证-->
+  <select id="yanZheng" parameterType="user" resultType="Integer">
+    select count(1) from easybuy_user
+    <where>
+      id=#{id}
+      <if test="mobile!=null">
+        and mobile=#{mobile}
+      </if>
+      <if test="email!=null">
+        and email=#{email}
+      </if>
+      <if test="password!=null">
+        and password=#{password}
+      </if>
+    </where>
+  </select>
 </mapper>

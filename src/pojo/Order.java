@@ -10,7 +10,7 @@ public class Order {
 
     private String loginName;
 
-    private String userAddress;
+    private Integer addressId;
 
     private Date createTime;
 
@@ -23,6 +23,16 @@ public class Order {
     private List<Order_Detail> detailList;
 
     private User user;
+
+    private User_Address user_Address;
+
+    public User_Address getUser_Address() {
+        return user_Address;
+    }
+
+    public void setUser_Address(User_Address user_Address) {
+        this.user_Address = user_Address;
+    }
 
     public User getUser() {
         return user;
@@ -72,14 +82,6 @@ public class Order {
         this.loginName = loginName == null ? null : loginName.trim();
     }
 
-    public String getUserAddress() {
-        return userAddress;
-    }
-
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress == null ? null : userAddress.trim();
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -102,5 +104,13 @@ public class Order {
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber == null ? null : serialNumber.trim();
+    }
+
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 }

@@ -5,10 +5,11 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="userId" jdbcType="INTEGER" property="userId" />
     <result column="loginName" jdbcType="VARCHAR" property="loginName" />
-    <result column="userAddress" jdbcType="VARCHAR" property="userAddress" />
+    <result column="addressId" jdbcType="INTEGER" property="addressId" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
     <result column="cost" jdbcType="REAL" property="cost" />
     <result column="serialNumber" jdbcType="VARCHAR" property="serialNumber" />
+    <result column="state" jdbcType="INTEGER" property="state" />
     <!--一个订单项对多商品-->
     <collection property="detailList" ofType="pojo.Order_Detail">
       <id column="detail_id" property="id"/>
@@ -17,15 +18,25 @@
       <result column="detail_quantity" property="quantity"/>
       <result column="detail_cost" property="cost"/>
     </collection>
+    <collection property="user_Address" ofType="user_Address">
+      <id column="id" jdbcType="INTEGER" property="id"/>
+      <result column="userId" jdbcType="INTEGER" property="userId"/>
+      <result column="name" jdbcType="VARCHAR" property="name"/>
+      <result column="address" jdbcType="VARCHAR" property="address"/>
+      <result column="fullAddress" jdbcType="VARCHAR" property="fullAddress"/>
+      <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
-    id, userId, loginName, userAddress, createTime, cost, serialNumber
+    id, userId, loginName, addressId, createTime, cost, serialNumber, state
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
-    from easybuy_order
-    where id = #{id,jdbcType=INTEGER}
+    a.*, b.*
+    from easybuy_order a
+    inner join easybuy_user_address b
+    on a.addressId=b.id
+    where a.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from easybuy_order
@@ -33,13 +44,13 @@
   </delete>
   <insert id="insert" parameterType="pojo.Order">
     insert into easybuy_order (id, userId, loginName, 
-      userAddress, createTime, cost, 
-      serialNumber)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, 
-      #{userAddress,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{cost,jdbcType=REAL}, 
-      #{serialNumber,jdbcType=VARCHAR})
+      addressId, createTime, cost,
+      serialNumber, state)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR},
+      #{addressId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{cost,jdbcType=REAL},
+      #{serialNumber,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="pojo.Order">
+  <insert id="insertSelective" parameterType="pojo.Order" keyProperty="id" useGeneratedKeys="true">
     insert into easybuy_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -51,8 +62,8 @@
       <if test="loginName != null">
         loginName,
       </if>
-      <if test="userAddress != null">
-        userAddress,
+      <if test="addressId != null">
+        addressId,
       </if>
       <if test="createTime != null">
         createTime,
@@ -62,6 +73,9 @@
       </if>
       <if test="serialNumber != null">
         serialNumber,
+      </if>
+      <if test="state != null">
+        state,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -74,8 +88,8 @@
       <if test="loginName != null">
         #{loginName,jdbcType=VARCHAR},
       </if>
-      <if test="userAddress != null">
-        #{userAddress,jdbcType=VARCHAR},
+      <if test="addressId != null">
+        #{addressId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -85,6 +99,9 @@
       </if>
       <if test="serialNumber != null">
         #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -97,8 +114,8 @@
       <if test="loginName != null">
         loginName = #{loginName,jdbcType=VARCHAR},
       </if>
-      <if test="userAddress != null">
-        userAddress = #{userAddress,jdbcType=VARCHAR},
+      <if test="addressId != null">
+        addressId = #{addressId,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         createTime = #{createTime,jdbcType=TIMESTAMP},
@@ -109,6 +126,9 @@
       <if test="serialNumber != null">
         serialNumber = #{serialNumber,jdbcType=VARCHAR},
       </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -116,10 +136,11 @@
     update easybuy_order
     set userId = #{userId,jdbcType=INTEGER},
       loginName = #{loginName,jdbcType=VARCHAR},
-      userAddress = #{userAddress,jdbcType=VARCHAR},
+      addressId = #{addressId,jdbcType=INTEGER},
       createTime = #{createTime,jdbcType=TIMESTAMP},
       cost = #{cost,jdbcType=REAL},
-      serialNumber = #{serialNumber,jdbcType=VARCHAR}
+      serialNumber = #{serialNumber,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

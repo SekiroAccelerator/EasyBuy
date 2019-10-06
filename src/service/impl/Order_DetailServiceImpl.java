@@ -52,6 +52,11 @@ public class Order_DetailServiceImpl implements Order_DetailService {
         return count;
     }
 
+    @Override
+    public int insertSelective(Order_Detail record) {
+        return order_detailMapper.insertSelective(record);
+    }
+
     /**
      * 根据订单ID查询该订单下的所有购买的商品的详细信息
      * @param orderId

@@ -98,8 +98,36 @@ public class UserController {
     }
 
     /**
+     * 修改电话,邮箱,密码
+     * @param user
+     * @return
+     */
+    @RequestMapping("update")
+    @ResponseBody
+    public boolean update(User user) {
+        if (user.getPassword()!=null) {
+            user.setPassword(Code.jiaMiOne(user.getPassword()));
+        }
+        return service.updateByPrimaryKeySelective(user) > 0;
+    }
+
+    /**
+     * 验证电话,邮箱,密码
+     * @param user
+     * @return
+     */
+    @RequestMapping("updateYanZheng")
+    @ResponseBody
+    public boolean updateYanZheng(User user) {
+        if (user.getPassword()!=null) {
+            user.setPassword(Code.jiaMiOne(user.getPassword()));
+        }
+        return service.yanZheng(user) > 0;
+    }
+
+    /**
      * 修改用户
-     * 密码如果没有变动就跳过if,如果变动了就重新加密
+     * 上传头像
      * @param id
      * @return
      */

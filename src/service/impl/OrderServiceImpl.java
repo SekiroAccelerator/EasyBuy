@@ -113,5 +113,15 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.selectOrderStateCountById(userId,state);
     }
 
+    @Override
+    public int insertSelective(Order record) {
+        return orderMapper.insertSelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Order record) {
+        return orderMapper.updateByPrimaryKeySelective(record);
+    }
+
 
 }

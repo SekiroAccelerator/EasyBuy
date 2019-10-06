@@ -58,4 +58,11 @@ public interface UserMapper {
      */
     int updatePic(User user);
 
+    /**
+     * 验证邮箱,密码,电话
+     * @param user
+     * @return
+     */
+    int yanZheng(User user);
+
 }

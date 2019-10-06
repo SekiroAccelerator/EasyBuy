@@ -43,4 +43,18 @@ public interface OrderService {
      * @return
      */
     int selectOrderStateCountById(Integer userId,Integer state);
+
+    /**
+     * 选择性添加订单
+     * @param record
+     * @return
+     */
+    int insertSelective(Order record);
+
+    /**
+     * 选择性的修改订单信息
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(Order record);
 }

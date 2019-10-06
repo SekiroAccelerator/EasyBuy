@@ -80,4 +80,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
+    public int yanZheng(User user) {
+        return userMapper.yanZheng(user);
+    }
+
 }
