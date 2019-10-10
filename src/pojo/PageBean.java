@@ -9,6 +9,19 @@ public class PageBean {
     private Integer pageCount=1;
     private Integer pageSize =12;
     private List<User> list;
+    private List<Product> productList;
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
 
     public List<User> getList() {
         return list;

@@ -8,6 +8,7 @@ import pojo.PageBean;
 import pojo.User;
 import service.UserService;
 import utils.Code;
+import utils.DeleteFileUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -137,6 +138,7 @@ public class UserController {
                                          @RequestParam(value = "file",required = false) MultipartFile file) {
         Map<String,Object> map=new HashMap<>();
         String fileError="error";
+        String fileName = null;
         if (!file.isEmpty()) {
             String oldFileName=file.getOriginalFilename();//获得原文件名
             String houZhui= FilenameUtils.getExtension(oldFileName);//tomcat的工具包,拿到文件的后缀名
@@ -144,19 +146,12 @@ public class UserController {
             if (file.getSize()>size) {
                 map.put(fileError,"照片过大");
             }else if (houZhui.equalsIgnoreCase("jpg")||houZhui.equalsIgnoreCase("png")){
-                String fileName;
                 if (houZhui.equalsIgnoreCase("jpg")){
                     fileName= UUID.randomUUID().toString()+".jpg";
                 }else {
                     fileName= UUID.randomUUID().toString()+".png";
                 }
                 File file1=new File("D:\\Workspaces\\EasyBuyWeb\\images",fileName);
-                if (!file1.exists()){
-                    file1.mkdir();
-                    User user=service.userById(id);
-                    user.setPic(fileName);
-                    map.put("flag", service.updatePic(user));
-                }
                 try {
                     file.transferTo(file1);
                 } catch (IOException e) {
@@ -167,11 +162,21 @@ public class UserController {
                 map.put(fileError,"格式不正确");
             }
         }
+        User user=service.userById(id);
+        if (user.getPic()!=null&&!"".equals(user.getPic())){
+            DeleteFileUtil.deleteFile("images\\"+user.getPic());
+        }
+        user.setPic(fileName);
+        map.put("flag", service.updatePic(user));
         return map;
     }
     @RequestMapping("del")
     @ResponseBody
-    public boolean del(@RequestParam String id){
-        return service.deleteByPrimaryKey(Integer.parseInt(id))>0;
+    public boolean del(@RequestParam Integer id){
+        User user=service.userById(id.toString());
+        if (user.getPic()!=null&&!"user.jpg".equals(user.getPic())){
+            DeleteFileUtil.deleteFile("images\\"+user.getPic());
+        }
+        return service.deleteByPrimaryKey(id)>0;
     }
 }

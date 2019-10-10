@@ -25,6 +25,14 @@ public class Product implements Serializable {
 
     private Integer isDelete;
 
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
+
     private Date createTime;
 
     @Override
@@ -124,14 +132,6 @@ public class Product implements Serializable {
 
     public void setFileName(String fileName) {
         this.fileName = fileName == null ? null : fileName.trim();
-    }
-
-    public Integer getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
     }
 
     public Date getCreateTime() {

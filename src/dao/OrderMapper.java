@@ -63,7 +63,8 @@ public interface OrderMapper {
      * 查询订单数量（管理员）
      * @return
      */
-    int selectOrderCount2(@Param("state")Integer state);
+    int selectOrderCount2(@Param("state") Integer state, @Param("loginName") String loginName);
+
 
     /**
      * id和状态查订单数量

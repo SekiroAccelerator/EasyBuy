@@ -56,16 +56,16 @@ public class OrderServiceImpl implements OrderService {
      * 查询所有订单信息（管理员）
      */
     @Override
-    public Pages<Order> selectAllOrder2(Integer pageNow,Integer state){
+    public Pages<Order> selectAllOrder2(Integer pageNow,Integer state,String loginName){
         Pages<Order> pages = new Pages<Order>();
         pages.setPageSize(5);
         Map<String,Object> map = new HashMap<String,Object>();
-        if (state==2){
-            state=null;
-        }else {
+        if (state!=2){
             map.put("state", state);
+        }else {
+            state=null;
         }
-        int count = orderMapper.selectOrderCount2(state);
+        int count = orderMapper.selectOrderCount2(state,loginName);
         pages.setCount(count);
         pages.setPageCount(pages.getCount());
         if (pageNow>pages.getPageCount()&&pages.getPageCount()>0){
@@ -75,6 +75,7 @@ public class OrderServiceImpl implements OrderService {
         }else {
             pages.setPageNow(pageNow);
         }
+        map.put("loginName",loginName);
         map.put("pageStart",(pages.getPageNow()-1)*pages.getPageSize());
         map.put("pageSize",pages.getPageSize());
 

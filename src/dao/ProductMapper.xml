@@ -161,4 +161,20 @@
       createTime = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+<!--  商品数-->
+  <select id="count" resultType="Integer">
+    select count(1) from easybuy_product
+  </select>
+<!--  查看商品列表-->
+  <select id="productList" resultType="product">
+    select * from easybuy_product
+    <where>
+      <if test="isDelete != null">isDelete=#{isDelete}</if>
+    </where>
+    limit #{pageBean.pageNo},#{pageBean.pageSize}
+  </select>
+<!--  3级id看有没有商品-->
+  <select id="selectLv3" resultType="product">
+    select * from easybuy_product where categoryLevel3Id = #{categoryLevel3Id,jdbcType=INTEGER}
+  </select>
 </mapper>

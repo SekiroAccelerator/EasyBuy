@@ -5,11 +5,21 @@ public class Product_Category {
 
     private String name;
 
-    private Integer parentId;
+    private Integer parentId =0;
 
     private Integer type;
 
     private String iconClass;
+
+    private Product product;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public Integer getId() {
         return id;

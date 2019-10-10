@@ -60,6 +60,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="pojo.News">
     update easybuy_news
     <set>
+      <if test="id != null">
+        id = #{id,jdbcType=INTEGER},
+      </if>
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
       </if>
@@ -79,4 +82,39 @@
       createTime = #{createTime,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--根据title分页查询新闻信息-->
+  <select id="selectNewsLimit" resultType="News" parameterType="Map">
+    select * from easybuy_news
+    <where>
+      <if test="title != null and title != ''">
+        and title like concat('%',#{title},'%')
+      </if>
+    </where>
+    order by createTime desc
+    limit #{pageStart},#{pageSize}
+  </select>
+
+  <!--根据title查询新闻条数-->
+  <select id="selectNewsCount" resultType="int">
+     select count(1) from easybuy_news
+    <where>
+      <if test="title != null and title != ''">
+        and title like concat('%',#{title},'%')
+      </if>
+    </where>
+  </select>
+
+  <!--根据id查询新闻信息-->
+  <select id="selectNewsbyId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from easybuy_news
+    where id=#{id}
+  </select>
+
+  <!--查询最新的几条新闻-->
+  <select id="selectNews" parameterType="java.lang.Integer" resultType="News" >
+    select * from easybuy_news
+    order by createTime desc
+    limit #{size}
+  </select>
 </mapper>

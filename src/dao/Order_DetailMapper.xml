@@ -99,7 +99,7 @@
 
   <!--根据订单ID查询该订单下的所有购买的商品的详细信息-->
   <select id="selectDetailByOrderId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    SELECT detail.id,orderId,quantity,cost,product.name as product_name,product.price as product_price,product.fileName as product_fileName
+    SELECT detail.id,orderId,quantity,productId,cost,product.name as product_name,product.price as product_price,product.fileName as product_fileName
     FROM easybuy_order_detail as detail
     JOIN easybuy_product as product
     ON detail.productId = product.id

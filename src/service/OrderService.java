@@ -18,9 +18,11 @@ public interface OrderService {
     /**
      * 根据用户编号分页查询所有的订单信息（管理员）
      * @param pageNow
+     * @param state
+     * @param loginName
      * @return
      */
-    Pages<Order> selectAllOrder2(Integer pageNow,Integer state);
+    Pages<Order> selectAllOrder2(Integer pageNow, Integer state ,String loginName);
 
     /**
      * 根据ID主键删除订单号
