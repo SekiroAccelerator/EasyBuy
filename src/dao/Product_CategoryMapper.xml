@@ -118,4 +118,56 @@
     SELECT c.id FROM easybuy_product_category a,easybuy_product_category b,easybuy_product_category c
     WHERE a.id=#{id} AND a.`parentId` =b. id AND b.`parentId`=c.id
   </select>
+
+    <!--查询所有一级分类-->
+    <select id="selectAllOneId" resultMap="BaseResultMap">
+    SELECT * FROM easybuy_product_category WHERE TYPE = 1
+  </select>
+
+    <!--根据一级id查询所有三级分类-->
+    <select id="selectAllTwoIdByOneId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT * FROM easybuy_product_category
+    WHERE parentId IN (
+      SELECT id FROM easybuy_product_category WHERE parentId = #{id}
+    )
+  </select>
+
+    <!-- 查询三级分类 -->
+    <resultMap type="Product_Category" id="categoryResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="parentId" column="parentId"/>
+        <result property="type" column="type"/>
+        <result property="iconClass" column="iconClass"/>
+        <collection property="childList" ofType="Product_Category" resultMap="categoryResult2"/>
+    </resultMap>
+    <resultMap type="Product_Category" id="categoryResult2">
+        <id property="id" column="id2"/>
+        <result property="name" column="name2"/>
+        <result property="parentId" column="parentId2"/>
+        <result property="type" column="type2"/>
+        <result property="iconClass" column="iconClass2"/>
+        <collection property="childList" ofType="Product_Category" resultMap="categoryResult3"/>
+    </resultMap>
+    <resultMap type="Product_Category" id="categoryResult3">
+        <id property="id" column="id3"/>
+        <result property="name" column="name3"/>
+        <result property="parentId" column="parentId3"/>
+        <result property="type" column="type3"/>
+        <result property="iconClass" column="iconClass3"/>
+    </resultMap>
+    <!-- 查询商品分类 -->
+    <select id="selectByType"  resultMap="categoryResult">
+    SELECT a.`id`,a.`name`,a.`parentId`,a.`type`,a.`iconClass`,
+		b.`id` id2,b.`name` name2,b.`parentId` parentId2,b.`type` type2,b.`iconClass` iconClass2,
+        c.`id` id3,c.`name` name3,c.`parentId` parentId3,c.`type` type3,c.`iconClass` iconClass3
+        FROM easybuy_product_category a
+        JOIN easybuy_product_category b ON a.`type`=1 AND a.`id`=b.`parentId`
+        JOIN easybuy_product_category c ON b.`type`=2 AND b.`id`=c.`parentId`
+  </select>
+
+    <!-- 根据父类id查询三级分类 -->
+    <select id="selectByPid" resultType="product_category">
+    SELECT * FROM easybuy_product_category WHERE parentId=#{pid}
+  </select>
 </mapper>

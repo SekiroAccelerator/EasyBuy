@@ -177,4 +177,85 @@
   <select id="selectLv3" resultType="product">
     select * from easybuy_product where categoryLevel3Id = #{categoryLevel3Id,jdbcType=INTEGER}
   </select>
+
+  <!-- 根据三级分类id查找商品 -->
+  <select id="selectByThreeId" parameterType="Integer" resultType="product">
+    SELECT * FROM easybuy_product where categoryLevel3Id=#{id}
+  </select>
+
+  <!-- 根据三级id查询对应条数 -->
+  <select id="selectByTypeCount" parameterType="Map" resultType="Integer">
+    SELECT count(1) FROM easybuy_product where categoryLevel3Id=#{id}
+  </select>
+
+  <!-- 根据条件进行分类查询 -->
+  <select id="selectByType" parameterType="Map" resultType="product">
+    SELECT * FROM easybuy_product where categoryLevel3Id=#{id}
+    <if test="type != null and type == 1">
+      order by price
+    </if>
+    <if test="type != null and type == 2">
+      order by price desc
+    </if>
+    <if test="type != null and type == 3">
+      order by createTime desc
+    </if>
+    limit #{start},#{size}
+  </select>
+
+  <!-- 根据二级分类id和三级分类id查询数量 -->
+  <select id="selectByPidAndId" resultType="Integer">
+    SELECT COUNT(1) FROM easybuy_product WHERE categoryLevel2Id=#{pid} AND categoryLevel3Id=#{id}
+  </select>
+
+  <!-- 根据库存数量查找热门款 -->
+  <select id="selectByStock" resultType="product">
+    SELECT * FROM easybuy_product ORDER BY stock LIMIT 12
+  </select>
+
+  <!-- 根据价格查找最热卖商品 -->
+  <select id="selectByPrice" resultType="product">
+    SELECT * FROM easybuy_product ORDER BY price LIMIT 6
+  </select>
+
+  <!-- 根据一级id查询商品 -->
+  <select id="selectByCategoryLevel1Id" resultType="product">
+    SELECT * FROM easybuy_product WHERE `categoryLevel1Id` = #{id}
+    <if test="type != null and type == 1">
+      order by price
+    </if>
+    <if test="type != null and type == 2">
+      order by price desc
+    </if>
+    <if test="type != null and type == 3">
+      order by createTime desc
+    </if>
+    limit #{start},#{size}
+  </select>
+
+  <!-- 根据一级id查询商品数量 -->
+  <select id="selectByCategoryLevel1IdCount" parameterType="Map" resultType="Integer">
+    SELECT COUNT(1) FROM easybuy_product WHERE categoryLevel1Id = #{id}
+  </select>
+
+  <!-- 根据名字查询数量 -->
+  <select id="selectByNameCount" parameterType="Map" resultType="Integer">
+    SELECT count(1) FROM easybuy_product WHERE `name` LIKE concat ('%',#{name},'%')
+  </select>
+
+  <!-- 根据名字模糊查询商品 -->
+  <select id="selectByName" parameterType="String" resultType="product">
+    SELECT * FROM easybuy_product WHERE `name` LIKE concat ('%',#{name},'%')
+    <if test="type != null and type == 1">
+      order by price
+    </if>
+    <if test="type != null and type == 2">
+      order by price desc
+    </if>
+    <if test="type != null and type == 3">
+      order by createTime desc
+    </if>
+    limit #{start},#{size}
+  </select>
+
 </mapper>

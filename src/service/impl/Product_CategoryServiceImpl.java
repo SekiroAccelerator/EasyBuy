@@ -47,6 +47,16 @@ public class Product_CategoryServiceImpl implements Product_CategoryService {
     }
 
     @Override
+    public List<Product_Category> selectAllOneId() {
+        return mapper.selectAllOneId();
+    }
+
+    @Override
+    public List<Product_Category> selectAllTwoIdByOneId(Integer id) {
+        return mapper.selectAllTwoIdByOneId(id);
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(Product_Category record) {
         return mapper.updateByPrimaryKeySelective(record);
     }

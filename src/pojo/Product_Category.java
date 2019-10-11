@@ -1,5 +1,7 @@
 package pojo;
 
+import java.util.List;
+
 public class Product_Category {
     private Integer id;
 
@@ -12,6 +14,16 @@ public class Product_Category {
     private String iconClass;
 
     private Product product;
+
+    private List<Product_Category> childList  ;   //子类，即二级分类，三级分类
+
+    public List<Product_Category> getList() {
+        return childList;
+    }
+
+    public void setList(List<Product_Category> childList) {
+        this.childList = childList;
+    }
 
     public Product getProduct() {
         return product;

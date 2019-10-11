@@ -167,4 +167,37 @@ public class Product_CategoryController {
         Integer shuliang = 3;
         return service.selectCategoryByid(id,shuliang);
     }
+
+    /**
+     * 查询所有一级分类
+     * @return
+     */
+    @RequestMapping("/selectAllOneId")
+    @ResponseBody
+    public List<Product_Category> selectAllOneId(){
+        return service.selectAllOneId();
+    }
+
+    /**
+     * 根据一级id查询所有三级分类
+     * @param id
+     * @return
+     */
+    @RequestMapping("/selectAllTwoIdByOneId")
+    @ResponseBody
+    public List<Product_Category> selectAllTwoIdByOneId(@RequestParam(value = "id") Integer id){
+        return service.selectAllTwoIdByOneId(id);
+    }
+
+    /**
+     * 根据品牌id查询6个该品牌的商品（品牌为3级）
+     * @param id
+     * @return
+     */
+    @RequestMapping("/selectCategoryByid3")
+    @ResponseBody
+    public List<Product_Category> selectCategoryByid3(@RequestParam(value = "id") Integer id){
+        Integer shuliang = 6;
+        return service.selectCategoryByid(id,shuliang);
+    }
 }

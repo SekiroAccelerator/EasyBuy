@@ -42,4 +42,30 @@ public interface Product_CategoryMapper {
      * 3级id查1级id
      */
     Integer oneByThree(Integer id);
+
+    /**
+     * 查询所有一级分类
+     * @return
+     */
+    List<Product_Category> selectAllOneId();
+
+    /**
+     * 根据一级id查询所有三级分类
+     * @param id
+     * @return
+     */
+    List<Product_Category> selectAllTwoIdByOneId(@Param(value = "id")Integer id);
+
+    /**
+     * 查询商品三级分类
+     * @return
+     */
+    List<Product_Category> selectByType();
+
+    /**
+     * 根据父类id查询三级分类
+     * @param pid
+     * @return
+     */
+    List<Product_Category> selectByPid(@Param("pid") Integer pid);
 }

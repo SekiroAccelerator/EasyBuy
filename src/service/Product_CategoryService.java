@@ -48,4 +48,17 @@ public interface Product_CategoryService {
      * 3级id查1级id
      */
     Integer oneByThree(Integer id);
+
+    /**
+     * 查询所有一级分类
+     * @return
+     */
+    List<Product_Category> selectAllOneId();
+
+    /**
+     * 根据一级id查询所有三级分类
+     * @param id
+     * @return
+     */
+    List<Product_Category> selectAllTwoIdByOneId(Integer id);
 }

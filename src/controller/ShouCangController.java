@@ -81,8 +81,10 @@ public class ShouCangController {
     @RequestMapping("shouCangShow")
     @ResponseBody
     public List<Product> shouCangShow(Integer id) {
-        if (userMap.get(id).isEmpty()&&mcc.get("userMap") == null) {
-            userMap.get(id).clear();
+        if (mcc.get("userMap") == null) {
+            if (userMap.get(id)!=null){
+                userMap.get(id).clear();
+            }
             mcc.set("userMap", 0, userMap);
         }
         return userMap.get(id);

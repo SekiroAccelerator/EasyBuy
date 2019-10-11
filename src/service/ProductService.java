@@ -3,8 +3,10 @@ package service;
 import org.apache.ibatis.annotations.Param;
 import pojo.PageBean;
 import pojo.Product;
+import pojo.Product_Category;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
     /**
@@ -38,5 +40,11 @@ public interface ProductService {
     /**
      3级id看有没有商品
      */
-    Product selectLv3(Integer icategoryLevel3Id);
+    List<Product> selectLv3(Integer icategoryLevel3Id);
+
+    //查询各级分类
+    List<Product_Category> selectByType();
+
+    //查询二级分类下面的所有三级分类以及数量
+    Map<String,Object> selectByPidAndId(Integer pid, Integer id) ;
 }
